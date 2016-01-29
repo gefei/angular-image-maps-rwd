@@ -9,60 +9,66 @@
 * Licensed under the MIT license
 *
 * angular-rwdImageMaps.js (by Philip Saa)
+* (c) zilla Partners Pty Ltd
 * https://github.com/cowglow/
 * @cowglow
+*
+* Enhanced by https://github.com/cowglow/angular-image-maps-rwd/pull/1/files
 */
 
+
 angular.module('rwdImageMaps',[])
-	.directive('rwdimgmap', function($window){
-		return{
-			restrict: 'CA',
-			link:function(scope, element, attrs){
-				element.bind('load', function() {
+    .directive('rwdimgmap', function($window){
+        return{
+            restrict: 'CA',
+            link:function(scope, element, attrs){
 
-					var w = $(element).attr('width'),
-						h = $(element).attr('height');
-						
-					function resize(){
-						if (!w || !h) {
-							var temp = new Image();
-							temp.src = $(element).attr('src');
-							if(temp.src == undefined)
-								temp.src = $(element).attr('ng-src');
+                    var w = $(element).attr('width'),
+                        h = $(element).attr('height');
 
-							if (!w)
-								w = temp.width;
-							if (!h)
-								h = temp.height;
-						}
-						
-						var wPercent = $(element).width()/100,
-							hPercent = $(element).height()/100,
-							map = attrs.usemap.replace('#', ''),
-							c = 'coords';
-						
-						angular.element('map[name="' + map + '"]').find('area').each(function(){
-							var $this = $(this);
-							
-							if (!$this.data(c)){
-								$this.data(c, $this.attr(c));
-							}
-								
-							var coords = $this.data(c).split(','),
-								coordsPercent = new Array(coords.length);
-							
-							for (var i = 0; i<coordsPercent.length; ++i){
-								if (i % 2 === 0){
-									coordsPercent[i] = parseInt(((coords[i]/w)*100)*wPercent);
-								} else {
-									coordsPercent[i] = parseInt(((coords[i]/h)*100)*hPercent);
-								};
-							};
-							$this.attr(c, coordsPercent.toString());
-						});
-					}
-					angular.element($window).resize(resize).trigger('resize');
-				});
-			}
-		};
-	});
+                    function resize(){
+                        var elem = angular.element(element)[0];
+                        if (!w || !h) {
+                            var temp = new Image();
+                            temp.src = elem.src;
+                            if(temp.src == undefined)
+                                temp.src = $(element).attr('ng-src');
+
+                            if (!w)
+                                w = temp.width;
+                            if (!h)
+                                h = temp.height;
+                        }
+
+                        var wPercent = elem.width/100,
+                            hPercent = elem.height/100,
+                            map = attrs.usemap.replace('#', ''),
+                            c = 'coords',
+                            areas = angular.element(document.querySelector('map[name="' + map + '"]')).find('area');
+
+                        angular.forEach(areas, function(item){
+                            var area = angular.element(item);
+                            if (!area.data(c)){
+                                !area.data(c, area.attr(c));
+                            }
+
+                            var coords = area.data(c).split(','),
+                                coordsPercent = new Array(coords.length);
+
+                            for (var i = 0; i<coordsPercent.length; ++i){
+                                if (i % 2 === 0){
+                                    coordsPercent[i] = parseInt(((coords[i]/w)*100)*wPercent);
+                                } else {
+                                    coordsPercent[i] = parseInt(((coords[i]/h)*100)*hPercent);
+                                }
+                            }
+                            area.attr(c, coordsPercent.toString());
+                        });
+                    }
+
+                    resize();
+                    angular.element($window).bind("resize", resize)
+
+            }
+        };
+    });
