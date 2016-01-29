@@ -23,16 +23,14 @@ angular.module('rwdImageMaps',[])
             restrict: 'CA',
             link:function(scope, element, attrs){
 
-                    var w = $(element).attr('width'),
-                        h = $(element).attr('height');
+                    var w = attrs.width;
+                        h = attrs.height;
 
                     function resize(){
                         var elem = angular.element(element)[0];
                         if (!w || !h) {
                             var temp = new Image();
                             temp.src = elem.src;
-                            if(temp.src == undefined)
-                                temp.src = $(element).attr('ng-src');
 
                             if (!w)
                                 w = temp.width;
