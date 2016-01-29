@@ -37,4 +37,4 @@ http://www.cowglow.com/github/rwdImageMaps
 
 Copyright (c) 2012 [Matt Stow](http://mattstow.com)  
 Licensed under the MIT license *(see [LICENSE](https://github.com/stowball/jQuery-rwdImageMaps/blob/master/LICENSE) for details)*  
-Minified version created with Online YUI Compressor: http://www.refresh-sf.com/yui/
+Minified version created with Online YUI Compressor: http://refresh-sf.com/
