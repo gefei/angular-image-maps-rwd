@@ -1,3 +1,6 @@
+This software is a merge of master at https://github.com/cowglow/angular-image-maps-rwd and https://github.com/cowglow/angular-image-maps-rwd/pull/1
+
+
 # AngularJS RWD Image Maps
 
 ### An AngularJS Directive that allows image maps to be used in a responsive design by recalculating the area coordinates to match the actual image size on load and window.resize
@@ -35,6 +38,7 @@ http://www.cowglow.com/github/rwdImageMaps
 
 ---
 
-Copyright (c) 2012 [Matt Stow](http://mattstow.com)  
+Original Copyright (c) 2012 [Matt Stow](http://mattstow.com), 2013 Izilla Partners Pty Ltd
+Copyright (c) 2016 Gefei
 Licensed under the MIT license *(see [LICENSE](https://github.com/stowball/jQuery-rwdImageMaps/blob/master/LICENSE) for details)*  
 Minified version created with Online YUI Compressor: http://refresh-sf.com/
