@@ -18,7 +18,7 @@
 
 
 angular.module('rwdImageMaps',[])
-    .directive('rwdimgmap', function($window){
+    .directive('rwdimgmap', ['$window', function($window){
         return{
             restrict: 'CA',
             link:function(scope, element, attrs){
@@ -71,4 +71,4 @@ angular.module('rwdImageMaps',[])
 
             }
         };
-    });
+    }]);
